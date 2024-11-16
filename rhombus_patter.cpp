@@ -1,3 +1,17 @@
+/*
+         **********
+        **********
+       **********
+      **********
+     **********
+    **********
+   **********
+  **********
+ **********
+**********
+
+*/
+
 #include<iostream>
 #include<cmath>
 using namespace std;
@@ -9,20 +23,15 @@ int main()
     cout<<"Enter a number: ";
     cin>>n;
 
-    //upper half
     for(int i = 1; i<=n; i++)
     {
         for(int j=1; j<=n-i; j++)
         {
             cout<<" ";
         }
-        for(int j=i; j>=1; j--)
+        for(int j=1; j<=n; j++)
         {
-            cout<<j;
-        }
-        for(int j=2; j<=i; j++)
-        {
-            cout<<j;
+            cout<<"*";
         }
         cout<<endl;
     }
