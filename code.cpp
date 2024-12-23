@@ -3,40 +3,41 @@
 #include<iostream>
 using namespace std;
 
+    int maxArea(vector<int>& height) {
+        int st=0, end= height.size()-1;
 
-void rotate_array_90_degree(int arr[][4], int m, int n)
-{
-    
-    for (int j=0; j<(n/2); j++){
-        int x=n-1-j;
-        int y=m-1-j;
-        for(int i=0+j; i<n-1-j; i++)
+        int area = 0;
+        while(st < end )
         {
-            int temp = arr[j][i];
-            arr[j][i] = arr[y][j];
-            arr[y][j] = arr[x][y];
-            arr[x][y] = arr[i][x];
-            arr[i][x] = temp;
-            cout<<"y : "<<y<<" x : "<<x<<" j :"<<j<<" i :"<<i<<endl;
-            y--;
+            int currArea = 0;
+            if(height[st] <= height[end])
+            {
+                currArea = height[st] * (end-st);
+                st++;
+
+            }else if (height[st] > height[end])
+            {
+                currArea = height[end] * (end-st);
+                end--;
+            }
+
+            if(area < currArea)
+            {
+                area = currArea;
+            }
         }
-        cout<<endl;
+
+
+        return area;
     }
 
-    // cout<<y<<endl;
-    for( int i =0; i<m; i++)
-    {
-        for(int j=0; j<n; j++)
-        {
-            cout<<arr[i][j]<<" ";
-        }
-        cout<<endl;
-    }
 
-}
 
 int main()
 {
-    int arr[4][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
-    rotate_array_90_degree(arr,4,4);
+
+    vector<int> height={1,8,6,2,5,4,8,3,7};
+
+    cout<<maxArea(height)<<endl;
+    
 }
