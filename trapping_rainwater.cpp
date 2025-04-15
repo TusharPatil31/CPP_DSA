@@ -3,6 +3,14 @@
 #include<iostream>
 using namespace std;
 
+void printArray(int *arr_ptr, int n){
+    for(int i =0; i<n; i++)
+    {
+        cout<<arr_ptr[i]<<" ";
+    }
+    cout<<"\n";
+}
+
 int trapWater(int *arr_ptr, int n)
 {
     int leftMax[20000], rightMax[20000];
@@ -13,12 +21,16 @@ int trapWater(int *arr_ptr, int n)
     {
         leftMax[i] = max(leftMax[i-1], arr_ptr[i-1]);
     }
-
+    
+    printArray(leftMax, n);
+    
     for (int i = n-2; i>=0; i--)
     {
         rightMax[i] = max(rightMax[i+1], arr_ptr[i+1]);
     }
-
+    
+    printArray(rightMax, n);
+    
     int trappedWater = 0;
 
     for(int i =0; i<n; i++)

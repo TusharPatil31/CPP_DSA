@@ -1,43 +1,142 @@
-
-
 #include<iostream>
+#include<cmath>
+#include<string>
+#include<vector>
 using namespace std;
 
-    int maxArea(vector<int>& height) {
-        int st=0, end= height.size()-1;
+void oddEven(int num)
+{
+    if(!(num&1))
+    {
+        cout<<"Even"<<endl;
+    }else
+    {
+        cout<<"Odd"<<endl;
+    }
+}
 
-        int area = 0;
-        while(st < end )
-        {
-            int currArea = 0;
-            if(height[st] <= height[end])
-            {
-                currArea = height[st] * (end-st);
-                st++;
+int getIthBit(int num, int i)
+{
+    int bitmask = 1<<i;
 
-            }else if (height[st] > height[end])
-            {
-                currArea = height[end] * (end-st);
-                end--;
-            }
+    if(!(num & bitmask))
+    {
+        return 0;
+    }else
+    {
+        return 1;
+    }
+}
 
-            if(area < currArea)
-            {
-                area = currArea;
-            }
-        }
+int setIthBit(int num, int i)
+{
+    int bitmask = 1<<i;
 
+    return (num|bitmask);
+}
 
-        return area;
+int clearIthBit(int num, int i)
+{
+    int bitmask = ~(1<<i);
+
+    return (num & bitmask);
+}
+
+bool isPowerOf2(int num)
+{
+    if(!(num &(num-1)))
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void updateIthBit(int num, int pos, int i)
+{
+    num = num & ~(1<<pos);
+
+    num = num | (i<<pos);
+
+    cout<<num<<endl;
+}
+
+void clearLastIthbit(int num, int i)
+{
+    int bitmask = ~(0)<<i;
+
+    num = num & bitmask;
+
+    cout<<num<<endl;
+}
+
+void countSetBits(int num)
+{
+    int count = 0;
+
+    while(num>0)
+    {
+        int lastdig = num & 1;
+
+        count += lastdig;
+
+        num = num >> 1;
     }
 
+    cout<<count<<endl;
+}
 
-
-int main()
+void fastExpo(int x, int n)
 {
+    int ans = 1;
 
-    vector<int> height={1,8,6,2,5,4,8,3,7};
+    while(n>0)
+    {
+        int lastdig = n & 1;
 
-    cout<<maxArea(height)<<endl;
-    
+        if(lastdig)
+        {
+            ans = ans * x;
+        }
+
+        x  = x * x;
+        n = n >> 1;
+    }
+
+    cout<<ans<<endl;
+}
+
+void clearRangeBits(int num, int i, int j)
+{
+    for(int idx=i; idx<=j; idx++)
+    {
+        int bitmask = 1<<idx;
+        num = num ^ bitmask;
+    }
+    cout<<num<<endl;
+}
+
+void divideTwoInt(int dividend, int divisor)
+{
+    int qoutient = 0;
+    int power = 0;
+    int ans =0;
+    while(ans>dividend)
+    {
+        int pow_of_2 = pow(2,power);
+        ans = divisor * pow_of_2;
+        if(ans <= dividend ){
+            qoutient += pow_of_2;
+        }
+        power++;
+    }
+    cout<<qoutient<<endl;
+
+}
+int main()
+{   
+    divideTwoInt(10,3);
+
+    cout<<(3<<(2 ^ 0))<<endl;
+    return 0;
 }
